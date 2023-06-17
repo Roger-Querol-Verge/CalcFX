@@ -2,10 +2,6 @@ package com.example.calcfx;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.OverrunStyle;
-import javafx.scene.paint.Paint;
-
-
 
 public class HelloController {
     @FXML
@@ -15,68 +11,47 @@ public class HelloController {
 
     @FXML
     protected void onButtonClick0() {
-        String buttonText = "0";
-        concatenatedText.append(buttonText);
-        updateLabel();
+        num(0);
     }
     @FXML
     protected void onButtonClick1() {
-        String buttonText = "1";
-        concatenatedText.append(buttonText);
-        updateLabel();
+        num(1);
     }
     @FXML
     protected void onButtonClick2() {
-        String buttonText = "2";
-        concatenatedText.append(buttonText);
-        updateLabel();
+        num(2);
     }
     @FXML
     protected void onButtonClick3() {
-        String buttonText = "3";
-        concatenatedText.append(buttonText);
-        updateLabel();
+        num(3);
     }
     @FXML
     protected void onButtonClick4() {
-        String buttonText = "4";
-        concatenatedText.append(buttonText);
-        updateLabel();
+        num(4);
     }
     @FXML
     protected void onButtonClick5() {
-        String buttonText = "5";
-        concatenatedText.append(buttonText);
-        updateLabel();
+        num(5);
     }
     @FXML
     protected void onButtonClick6() {
-        String buttonText = "6";
-        concatenatedText.append(buttonText);
-        updateLabel();
+        num(6);
     }
     @FXML
     protected void onButtonClick7() {
-        String buttonText = "7";
-        concatenatedText.append(buttonText);
-        updateLabel();
+        num(7);
     }
     @FXML
     protected void onButtonClick8() {
-        String buttonText = "8";
-        concatenatedText.append(buttonText);
-        updateLabel();
+        num(8);
     }
     @FXML
     protected void onButtonClick9() {
-        String buttonText = "9";
-        concatenatedText.append(buttonText);
-        updateLabel();
+        num(9);
     }
     @FXML
     protected void onButtonClickPlus() {
         simbolo("+");
-
     }
     @FXML
     protected void onButtonClickMinus() {
@@ -92,16 +67,20 @@ public class HelloController {
         int numCom = -1;
         try {
             numCom = Integer.parseInt(subLastChar);
-        } catch (Exception e) { }
+        } catch (Exception ignored) { }
 
-        if(numCom != -1) {
-            concatenatedText.append(simbolo);
-            updateLabel();
-        } else{
-            String subWithoutLast = concatenatedText.substring(0, concatenatedText.length()-1);
+        if (numCom == -1) {
+            String subWithoutLast = concatenatedText.substring(0, concatenatedText.length() - 1);
             concatenatedText = new StringBuilder(subWithoutLast);
-            concatenatedText.append(simbolo);
-            updateLabel();
         }
+        concatenatedText.append(simbolo);
+        updateLabel();
     }
+    private void num (int num)
+    {
+        String buttonText = String.valueOf(num);
+        concatenatedText.append(buttonText);
+        updateLabel();
+    }
+
 }
