@@ -50,6 +50,11 @@ public class HelloController {
         num(9);
     }
     @FXML
+    protected void onButtonClickDelete() {
+        concatenatedText.delete(0,concatenatedText.length());
+        updateLabel();
+    }
+    @FXML
     protected void onButtonClickPlus() {
         simbolo("+");
     }
@@ -61,23 +66,27 @@ public class HelloController {
         Text.setText(concatenatedText.toString());
     }
 
-    private void simbolo (String simbolo)
-    {
+    private void simbolo (String simbolo) {
         String subLastChar = concatenatedText.substring(concatenatedText.length()-1);
-        int numCom = -1;
-        try {
-            numCom = Integer.parseInt(subLastChar);
-        } catch (Exception ignored) { }
+        String stringMatches = String.valueOf(concatenatedText);
 
-        if (numCom == -1) {
-            String subWithoutLast = concatenatedText.substring(0, concatenatedText.length() - 1);
-            concatenatedText = new StringBuilder(subWithoutLast);
+        if(stringMatches.matches(".*[-+*/].*")){
+
+        }else{
+            int numCom = -1;
+            try {
+                numCom = Integer.parseInt(subLastChar);
+            } catch (Exception ignored) { }
+
+            if (numCom == -1) {
+                String subWithoutLast = concatenatedText.substring(0, concatenatedText.length() - 1);
+                concatenatedText = new StringBuilder(subWithoutLast);
+            }
+            concatenatedText.append(simbolo);
+            updateLabel();
         }
-        concatenatedText.append(simbolo);
-        updateLabel();
     }
-    private void num (int num)
-    {
+    private void num (int num) {
         String buttonText = String.valueOf(num);
         concatenatedText.append(buttonText);
         updateLabel();
