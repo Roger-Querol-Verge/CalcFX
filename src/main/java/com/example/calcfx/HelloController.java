@@ -62,6 +62,24 @@ public class HelloController {
     protected void onButtonClickMinus() {
         simbolo("-");
     }
+    @FXML
+    protected void onButtonClickMulti() {
+        simbolo("*");
+    }
+    @FXML
+    public void onButtonClickSolution() {
+        String All = String.valueOf(concatenatedText);
+        if(All.matches(".*[+].*")){
+            Solution("\\+", All);
+        } else if (All.matches(".*[-].*")){
+            Solution("-", All);
+        } else if (All.matches(".*[*].*")){
+            Solution("\\*", All);
+        } else if (All.matches(".*[/].*")){
+            Solution("/", All);
+        }
+    }
+
     private void updateLabel() {
         Text.setText(concatenatedText.toString());
     }
@@ -70,9 +88,11 @@ public class HelloController {
         String subLastChar = concatenatedText.substring(concatenatedText.length()-1);
         String stringMatches = String.valueOf(concatenatedText);
 
-        if(stringMatches.matches(".*[-+*/].*")){
-
-        }else{
+//        if(stringMatches.matches(".*[-+*/].*")){
+//            onButtonClickSolution();
+//            concatenatedText.append(simbolo);
+//            updateLabel();
+//        }else{
             int numCom = -1;
             try {
                 numCom = Integer.parseInt(subLastChar);
@@ -84,11 +104,32 @@ public class HelloController {
             }
             concatenatedText.append(simbolo);
             updateLabel();
-        }
+        //}
     }
+
     private void num (int num) {
         String buttonText = String.valueOf(num);
         concatenatedText.append(buttonText);
+        updateLabel();
+    }
+
+    private  void Solution (String simbolo, String All) {
+        String[] parts;
+        parts = All.split(simbolo);
+        int part1 = Integer.parseInt(parts[0]);
+        int part2 = Integer.parseInt(parts[1]);
+        if (simbolo.length()>1){
+            simbolo = simbolo.substring(1);
+        }
+        int solucion = switch (simbolo) {
+            case "+" -> part1 + part2;
+            case "-" -> part1 - part2;
+            case "*" -> part1 * part2;
+            case "/" -> part1 / part2;
+            default -> 0;
+        };
+        concatenatedText.delete(0,concatenatedText.length());
+        concatenatedText.append(solucion);
         updateLabel();
     }
 
